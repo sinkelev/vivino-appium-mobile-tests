@@ -1,59 +1,72 @@
 package org.sinkelev.tests.pages;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import static java.time.temporal.ChronoUnit.SECONDS;
+
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.PageFactory;
+import io.appium.java_client.pagefactory.WithTimeout;
+import io.qameta.allure.Step;
 
-public class LoginPage {
+import org.openqa.selenium.WebElement;
+import org.sinkelev.tests.base.page.BasePage;
+import org.sinkelev.utils.Utils;
 
-    private AppiumDriver<MobileElement> driver;
+public class LoginPage extends BasePage {
+    private Utils utils;
 
-    @AndroidFindBy(id = "com.google.android.gm:id/welcome_tour_got_it")
-    private MobileElement gotItButton;
+    @AndroidFindBy(id = "vivino.web.app:id/btn_email_continue")
+    private WebElement emailEnterBtn;
 
-    @AndroidFindBy(id = "com.google.android.gm:id/account_setup_text")
-    private MobileElement addAccountButton;
+    @WithTimeout(time = 10, chronoUnit = SECONDS)
+    @AndroidFindBy(id = "vivino.web.app:id/edit_text")
+    private WebElement emailInput;
 
-    @AndroidFindBy(id = "com.google.android.gm:id/account_address")
-    private MobileElement emailInput;
+    @WithTimeout(time = 10, chronoUnit = SECONDS)
+    @AndroidFindBy(id = "vivino.web.app:id/btn_fb_continue")
+    private WebElement nextBtn;
 
-    @AndroidFindBy(id = "com.google.android.gm:id/next")
-    private MobileElement nextButton;
+    @WithTimeout(time = 10, chronoUnit = SECONDS)
+    @AndroidFindBy(xpath = "//*[@text='Password']")
+    private WebElement passwordInput;
 
-    @AndroidFindBy(id = "com.google.android.gm:id/password")
-    private MobileElement passwordInput;
+    @AndroidFindBy(xpath = "//*[@text='Log in']")
+    private WebElement logInBtn;
 
-    @AndroidFindBy(id = "com.google.android.gm:id/next")
-    private MobileElement signInButton;
+    @AndroidFindBy(xpath = "//*[@text='Log in']")
+    private WebElement searchInput;
 
-    public LoginPage(AppiumDriver<MobileElement> driver) {
-        this.driver = driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    @Step("Click on 'Continue with email'")
+    public LoginPage clickEmailEnterBtn() {
+        emailEnterBtn.click();
+        return this;
     }
 
-    public void clickGotItButton() {
-        gotItButton.click();
+    @Step("Enter email")
+    public LoginPage enterEmail() {
+        emailInput.sendKeys("apple_909@mail.ru");
+        return this;
     }
 
-    public void clickAddAccountButton() {
-        addAccountButton.click();
+    @Step("Click 'Continue'")
+    public LoginPage clickNextButton() {
+        nextBtn.click();
+        return this;
     }
 
-    public void enterEmail(String email) {
-        emailInput.sendKeys(email);
+    @Step("Enter password")
+    public LoginPage enterPassword() {
+        passwordInput.isDisplayed();
+        passwordInput.sendKeys("111111Qw");
+        return this;
     }
 
-    public void clickNextButton() {
-        nextButton.click();
+    @Step("Click on 'Log in'")
+    public LoginPage clickLogInBtn() {
+        logInBtn.click();
+        return this;
     }
 
-    public void enterPassword(String password) {
-        passwordInput.sendKeys(password);
-    }
-
-    public void clickSignInButton() {
-        signInButton.click();
+    @Step("Open Home page")
+    public HomePage getMainPage() {
+        return new HomePage();
     }
 }
