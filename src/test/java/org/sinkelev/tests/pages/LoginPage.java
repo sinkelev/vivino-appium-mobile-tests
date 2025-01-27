@@ -8,11 +8,9 @@ import io.qameta.allure.Step;
 
 import org.openqa.selenium.WebElement;
 import org.sinkelev.tests.base.page.BasePage;
-import org.sinkelev.utils.Utils;
 
 public class LoginPage extends BasePage {
-    private Utils utils;
-
+    @WithTimeout(time = 30, chronoUnit = SECONDS)
     @AndroidFindBy(id = "vivino.web.app:id/btn_email_continue")
     private WebElement emailEnterBtn;
 
@@ -61,6 +59,7 @@ public class LoginPage extends BasePage {
 
     @Step("Click on 'Log in'")
     public LoginPage clickLogInBtn() {
+        logInBtn.isDisplayed();
         logInBtn.click();
         return this;
     }

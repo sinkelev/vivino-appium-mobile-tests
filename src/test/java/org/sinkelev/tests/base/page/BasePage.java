@@ -6,8 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.sinkelev.utils.DriverManager;
 import org.sinkelev.utils.Utils;
 
-import java.time.Duration;
-
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 

@@ -3,6 +3,7 @@ package org.sinkelev.utils;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -35,9 +36,9 @@ public class DriverManager {
                 options.setPlatformVersion(properties.getProperty("platformVersion"));
                 options.setAppActivity(properties.getProperty("appActivity"));
                 //for slow pc
-                options.setAdbExecTimeout(Duration.ofMillis(90000));
-                options.setNewCommandTimeout(Duration.ofMillis(900));
-                options.setUiautomator2ServerLaunchTimeout(Duration.ofMillis(90000));
+                options.setAdbExecTimeout(Duration.ofMillis(120000));
+                options.setNewCommandTimeout(Duration.ofMillis(120000));
+                options.setUiautomator2ServerLaunchTimeout(Duration.ofMillis(120000));
 
                 driver = new AndroidDriver(new URL(properties.getProperty("appiumUrl")), options);
             } catch (MalformedURLException e) {
@@ -55,7 +56,14 @@ public class DriverManager {
     }
 
     public static void installApp() {
-        driver.installApp(properties.getProperty("appPath"));
+        String appPath = properties.getProperty("appPath");
+        File appFile = new File(System.getProperty("user.dir"), appPath);
+        driver.installApp(appFile.getAbsolutePath());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void uninstallApp() {
@@ -63,7 +71,15 @@ public class DriverManager {
     }
 
     public static void openApp() {
-        driver.activateApp(properties.getProperty("appPackage"));
+        if (driver.isAppInstalled(properties.getProperty("appPackage"))) {
+            driver.activateApp(properties.getProperty("appPackage"));
+
+        }
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void closeApp() {

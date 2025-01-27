@@ -32,9 +32,12 @@ public class LoginTest {
         loginPage.enterPassword()
                 .clickLogInBtn();
         homePage = loginPage.getMainPage();
-        Assert.assertTrue(homePage.checkText("For you").isDisplayed());
-        Assert.assertTrue(homePage.checkText("Picked for you").isDisplayed());
-        Assert.assertTrue(homePage.checkText("Best wines under 500₽ right now").isDisplayed());
+        Assert.assertTrue(homePage.searchBtn.isDisplayed());
+        Assert.assertTrue(homePage.checkText("Find friends").isDisplayed());
+        Assert.assertTrue(homePage.checkText("Top-rated wines").isDisplayed());
+        //Assert.assertTrue(homePage.checkText("For you").isDisplayed());
+        //Assert.assertTrue(homePage.checkText("Picked for you").isDisplayed());
+        //Assert.assertTrue(homePage.checkText("Best wines under 500₽ right now").isDisplayed());
     }
 
     @AfterClass
