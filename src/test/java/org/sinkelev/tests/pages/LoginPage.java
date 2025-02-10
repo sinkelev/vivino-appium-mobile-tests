@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
     @AndroidFindBy(xpath = "//*[@text='Password']")
     private WebElement passwordInput;
 
-    @AndroidFindBy(xpath = "//*[@text='Log in']")
+    @AndroidFindBy(xpath = "//android.widget.Button[@text='Log in']")
     private WebElement logInBtn;
 
     @AndroidFindBy(xpath = "//*[@text='Log in']")

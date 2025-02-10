@@ -1,29 +1,31 @@
 package org.sinkelev.tests;
 
+import org.sinkelev.drivers.InitialDriver;
+import org.sinkelev.tests.base.BaseTest;
 import org.sinkelev.tests.pages.HomePage;
 import org.sinkelev.tests.pages.LoginPage;
-import org.sinkelev.utils.DriverManager;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginTest {
+public class LoginTest extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
 
     @BeforeMethod
     public void setUp() {
+        InitialDriver.set();
         loginPage = new LoginPage();
-        DriverManager.installAndOpenApp();
     }
 
     @Test
     public void logInEmailTest() {
+        loginPage.installAndOpenApp(APK);
         loginPage.clickEmailEnterBtn();
-        Assert.assertTrue(loginPage.checkText("What’s your email?").isDisplayed());
+        Assert.assertTrue(loginPage.checkText("What\u2019s your email?").isDisplayed());
 
         loginPage.enterEmail()
                 .clickNextButton();
@@ -40,8 +42,10 @@ public class LoginTest {
         //Assert.assertTrue(homePage.checkText("Best wines under 500₽ right now").isDisplayed());
     }
 
-    @AfterClass
-    public void tearDown() {
-        DriverManager.quitDriver();
+    @AfterClass(alwaysRun = true)
+    public void deleteApp() {
+        if (loginPage != null) {
+            loginPage.closeSession();
+        }
     }
 }

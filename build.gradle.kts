@@ -10,21 +10,27 @@ repositories {
 }
 
 dependencies {
+    implementation("org.projectlombok:lombok:1.18.30")
     testImplementation("org.testng:testng:7.9.0")
     testImplementation("io.appium:java-client:9.2.0")
     testImplementation("org.seleniumhq.selenium:selenium-java:4.18.1")
     testImplementation("io.qameta.allure:allure-testng:2.17.2")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
+    testCompileOnly("org.projectlombok:lombok:1.18.30")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
 tasks.test {
-    useTestNG()
-    jvmArgs ("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+    useTestNG(){
+        suites("/src/test/resources/testng.xml")
+    }
 }
 
 tasks.register("allureReport") {
     doLast {
         exec {
-            commandLine("allure", "serve", "${buildDir}/allure-results")
+            commandLine("allure", "serve", "${layout.buildDirectory.get().asFile.absolutePath}/allure-results")
         }
     }
 }
