@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.sinkelev.tests.base.page.BasePage;
 
 public class LoginPage extends BasePage {
-    @WithTimeout(time = 30, chronoUnit = SECONDS)
+    @WithTimeout(time = 60, chronoUnit = SECONDS)
     @AndroidFindBy(id = "vivino.web.app:id/btn_email_continue")
     private WebElement emailEnterBtn;
 

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Android" parallel="tests" thread-count="1" configfailurepolicy="continue">
-    <test name="Test">
+    <test name="genymotion-emulator">
+        <parameter name="url" value="http://localhost:4723/" />
+        <parameter name="platformName" value="Android" />
+        <parameter name="automationName" value="UiAutomator2" />
+        <parameter name="deviceName" value="Pixel" />
+        <parameter name="udid" value="127.0.0.1:6555" />
+        <parameter name="platformVersion" value="13" />
+        <parameter name="appActivity" value="com.vivino.activities.SiSuActivity" />
+        <classes>
+<!--
+            <class name="org.sinkelev.tests.LoginTest" />
+-->
+            <class name="org.sinkelev.tests.SearchTest" />
+        </classes>
+    </test>
+
+    <test name="android-studio-emulator">
         <parameter name="url" value="http://localhost:4723/" />
         <parameter name="platformName" value="Android" />
         <parameter name="automationName" value="UiAutomator2" />
@@ -10,7 +26,9 @@
         <parameter name="platformVersion" value="11" />
         <parameter name="appActivity" value="com.vivino.activities.SiSuActivity" />
         <classes>
+<!--
             <class name="org.sinkelev.tests.LoginTest" />
+-->
         </classes>
     </test>
 </suite>

@@ -8,7 +8,7 @@ import org.testng.annotations.Parameters;
 
 public class BaseTest {
 
-    protected static final String APK = "apk/vivino.apk";
+    protected static final String APK = BaseTest.class.getClassLoader().getResource("apk/vivino.apk").getPath();
 
     @BeforeClass
     @Parameters({"url", "platformName", "automationName", "deviceName", "udid", "platformVersion", "appActivity"})

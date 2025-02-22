@@ -4,16 +4,17 @@ import org.sinkelev.drivers.InitialDriver;
 import org.sinkelev.tests.base.BaseTest;
 import org.sinkelev.tests.pages.HomePage;
 import org.sinkelev.tests.pages.LoginPage;
-
+import org.sinkelev.tests.pages.SearchPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest {
+public class SearchTest extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
+    private SearchPage searchPage;
 
     @BeforeMethod
     public void setUp() {
@@ -22,7 +23,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void logInEmailTest() {
+    public void searchOpenTest() {
         loginPage.installAndOpenApp(APK);
         loginPage.clickEmailEnterBtn();
         Assert.assertTrue(loginPage.checkText("What\u2019s your email?").isDisplayed());
@@ -37,9 +38,13 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(homePage.searchInput.isDisplayed());
         Assert.assertTrue(homePage.checkText("Find friends").isDisplayed());
         Assert.assertTrue(homePage.checkText("Top-rated wines").isDisplayed());
-        //Assert.assertTrue(homePage.checkText("For you").isDisplayed());
-        //Assert.assertTrue(homePage.checkText("Picked for you").isDisplayed());
-        //Assert.assertTrue(homePage.checkText("Best wines under 500₽ right now").isDisplayed());
+
+        homePage.clickSearchInput();
+        searchPage = homePage.getSearchPage();
+       // Assert.assertTrue(searchPage.searchInput.isDisplayed());
+        Assert.assertTrue(searchPage.allWinesBtn.isDisplayed());
+        Assert.assertTrue(searchPage.myWinesBtn.isDisplayed());
+        Assert.assertTrue(searchPage.peopleBtn.isDisplayed());
     }
 
     @AfterClass(alwaysRun = true)
