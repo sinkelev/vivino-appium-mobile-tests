@@ -1,16 +1,20 @@
 package org.sinkelev.tests.pages;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
-
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.sinkelev.tests.base.page.BasePage;
 
+import java.time.Duration;
+
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.WithTimeout;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 
 public class HomePage extends BasePage {
-    @WithTimeout(time = 30, chronoUnit = SECONDS)
+
+    public HomePage() {
+        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(20)), this);
+    }
     @AndroidFindBy(xpath = "//*[@content-desc='Search']")
     public WebElement searchInput;
 
@@ -23,5 +27,10 @@ public class HomePage extends BasePage {
     @Step("Open Search page")
     public SearchPage getSearchPage() {
         return new SearchPage();
+    }
+
+    @Step("Check text on the page")
+    public WebElement checkText(String text) {
+        return wait.visibility(text(text));
     }
 }

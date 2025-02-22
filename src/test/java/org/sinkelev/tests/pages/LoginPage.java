@@ -1,28 +1,30 @@
 package org.sinkelev.tests.pages;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
-
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.WithTimeout;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.sinkelev.tests.base.page.BasePage;
 
+import java.time.Duration;
+
 public class LoginPage extends BasePage {
-    @WithTimeout(time = 60, chronoUnit = SECONDS)
+
+    public LoginPage() {
+        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(20)), this);
+    }
+
     @AndroidFindBy(id = "vivino.web.app:id/btn_email_continue")
     private WebElement emailEnterBtn;
 
-    @WithTimeout(time = 10, chronoUnit = SECONDS)
     @AndroidFindBy(id = "vivino.web.app:id/edit_text")
     private WebElement emailInput;
 
-    @WithTimeout(time = 10, chronoUnit = SECONDS)
     @AndroidFindBy(id = "vivino.web.app:id/btn_fb_continue")
     private WebElement nextBtn;
 
-    @WithTimeout(time = 10, chronoUnit = SECONDS)
     @AndroidFindBy(xpath = "//*[@text='Password']")
     private WebElement passwordInput;
 
@@ -34,6 +36,7 @@ public class LoginPage extends BasePage {
 
     @Step("Click on 'Continue with email'")
     public LoginPage clickEmailEnterBtn() {
+        emailEnterBtn.isDisplayed();
         emailEnterBtn.click();
         return this;
     }
@@ -67,5 +70,10 @@ public class LoginPage extends BasePage {
     @Step("Open Home page")
     public HomePage getMainPage() {
         return new HomePage();
+    }
+
+    @Step("Check text on the page")
+    public WebElement checkText(String text) {
+        return wait.visibility(text(text));
     }
 }

@@ -12,8 +12,7 @@
         <classes>
 <!--
             <class name="org.sinkelev.tests.LoginTest" />
--->
-            <class name="org.sinkelev.tests.SearchTest" />
+            <class name="org.sinkelev.tests.SearchTest" />-->
         </classes>
     </test>
 
@@ -26,9 +25,8 @@
         <parameter name="platformVersion" value="11" />
         <parameter name="appActivity" value="com.vivino.activities.SiSuActivity" />
         <classes>
-<!--
             <class name="org.sinkelev.tests.LoginTest" />
--->
+            <class name="org.sinkelev.tests.SearchTest" />
         </classes>
     </test>
 </suite>

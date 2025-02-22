@@ -5,27 +5,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.sinkelev.drivers.DriverService;
 import org.sinkelev.utils.Utils;
+import org.sinkelev.utils.wait.IWait;
+
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class BasePage {
-    private final Utils utils;
+    protected IWait wait;
     protected AndroidDriver driver;
     protected String app;
 
     public BasePage() {
         driver = (AndroidDriver) DriverService.instance().get();
-        this.utils = new Utils(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
-
-    public WebElement checkContentDesc(String text) {
-        return Utils.visibility(description(text));
-    }
-
-    public WebElement checkText(String text) {
-        return Utils.visibility(text(text));
+        wait = Utils.getWait();
     }
 
     protected By text(String text) {
