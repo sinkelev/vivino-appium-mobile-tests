@@ -1,2 +1,1 @@
-rootProject.name = "autotest"
-
+rootProject.name = "vivino-appium-mobile-tests"

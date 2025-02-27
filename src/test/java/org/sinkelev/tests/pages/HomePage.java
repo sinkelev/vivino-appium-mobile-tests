@@ -15,6 +15,7 @@ public class HomePage extends BasePage {
     public HomePage() {
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(20)), this);
     }
+
     @AndroidFindBy(xpath = "//*[@content-desc='Search']")
     public WebElement searchInput;
 

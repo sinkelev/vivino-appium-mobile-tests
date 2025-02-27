@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("io.qameta.allure") version "2.12.0"
+    id("checkstyle")
 }
 
 group = "org.sinkelev"
@@ -14,23 +16,28 @@ dependencies {
     testImplementation("org.testng:testng:7.9.0")
     testImplementation("io.appium:java-client:9.2.0")
     testImplementation("org.seleniumhq.selenium:selenium-java:4.18.1")
-    testImplementation("io.qameta.allure:allure-testng:2.17.2")
+    testImplementation("io.qameta.allure:allure-testng:2.8.1")
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
-    testCompileOnly("org.projectlombok:lombok:1.18.30")
+    testImplementation("org.projectlombok:lombok:1.18.30")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
-tasks.test {
-    useTestNG(){
-        suites("/src/test/resources/testng.xml")
-    }
+allure {
+    version = "2.12.0"
 }
 
-tasks.register("allureReport") {
-    doLast {
-        exec {
-            commandLine("allure", "serve", "${layout.buildDirectory.get().asFile.absolutePath}/allure-results")
-        }
+checkstyle {
+    configFile = file("checkstyle.xml")
+    toolVersion = "10.12.4"
+}
+
+tasks.test {
+    useTestNG {
+        suites("/src/test/resources/testng.xml")
     }
+    dependsOn(tasks.checkstyleTest)
+}
+tasks.clean {
+    finalizedBy(tasks.allureServe)
 }

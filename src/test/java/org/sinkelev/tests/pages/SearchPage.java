@@ -15,6 +15,7 @@ public class SearchPage extends BasePage {
     public SearchPage() {
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(20)), this);
     }
+
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Search for wine']")
     public WebElement searchInput;
 

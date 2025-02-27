@@ -11,6 +11,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import io.qameta.allure.Allure;
+
 public class SearchTest extends BaseTest {
 
     private LoginPage loginPage;
@@ -26,6 +28,7 @@ public class SearchTest extends BaseTest {
 
     @Test
     public void searchOpenTest() {
+        Allure.getLifecycle().updateTestCase(testResult -> testResult.setName("Checking the opening of the search page"));
         loginPage.installAndOpenApp(APK);
         loginPage.clickEmailEnterBtn();
         Assert.assertTrue(loginPage.checkText("What\u2019s your email?").isDisplayed());
@@ -51,6 +54,7 @@ public class SearchTest extends BaseTest {
 
     @Test
     public void searchVineTest() {
+        Allure.getLifecycle().updateTestCase(testResult -> testResult.setName("Checking out search results when entering a request"));
         loginPage.installAndOpenApp(APK);
         loginPage.clickEmailEnterBtn();
         Assert.assertTrue(loginPage.checkText("What\u2019s your email?").isDisplayed());
@@ -80,6 +84,7 @@ public class SearchTest extends BaseTest {
 
     @Test
     public void searchVineDetailTest() {
+        Allure.getLifecycle().updateTestCase(testResult -> testResult.setName("Checking the transition to the detailed page of wine from the search page"));
         loginPage.installAndOpenApp(APK);
         loginPage.clickEmailEnterBtn();
         Assert.assertTrue(loginPage.checkText("What\u2019s your email?").isDisplayed());

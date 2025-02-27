@@ -1,20 +1,16 @@
 package org.sinkelev.tests.base.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.sinkelev.drivers.DriverService;
 import org.sinkelev.utils.Utils;
 import org.sinkelev.utils.wait.IWait;
 
 
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class BasePage {
     protected IWait wait;
     protected AndroidDriver driver;
-    protected String app;
 
     public BasePage() {
         driver = (AndroidDriver) DriverService.instance().get();
@@ -55,6 +51,5 @@ public class BasePage {
     public void openApp() {
         driver.activateApp("vivino.web.app");
     }
-
 }
 
