@@ -23,6 +23,11 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 allure {
     version = "2.12.0"
 }

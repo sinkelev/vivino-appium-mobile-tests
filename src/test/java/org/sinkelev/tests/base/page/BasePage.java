@@ -52,4 +52,3 @@ public class BasePage {
         driver.activateApp("vivino.web.app");
     }
 }
-
